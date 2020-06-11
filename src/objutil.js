@@ -184,6 +184,8 @@ function assign(target, arg) { // length==2
 }
 
 function merge(target, arg) { // length==2
+  // freezing the prototype to prevent prototype pollution
+  Object.freeze(arg.prototype)
   return _assignHelper(target, arguments, function (a, b, key, path) {
     var bval = b[key]
     if (bval !== undefined && isPrimitive(bval)) a[key] = bval
